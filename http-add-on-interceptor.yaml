@@ -1,0 +1,14 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: interceptor-scaledobject
+  namespace: keda
+spec:
+  scaleTargetRef:
+    name: interceptor  # Ensure this matches your actual deployment name
+  triggers:
+  - type: http
+    metadata:
+      url: "http://interceptor-service:8080"
+      method: "GET"
+      threshold: "3"  # Adjust this based on your desired request count
