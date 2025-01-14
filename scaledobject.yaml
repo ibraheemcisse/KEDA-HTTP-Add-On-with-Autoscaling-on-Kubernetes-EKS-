@@ -1,0 +1,31 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: interceptor-scaledobject
+  namespace: keda
+spec:
+  scaleTargetRef:
+    name: interceptor  # The name of the deployment you want to scale
+  triggers:
+  - type: http
+    metadata:
+      url: "http://interceptor-service:8080"  # URL of your service
+      method: "GET"  # You may want to use "GET" or another method, depending on your setup
+      threshold: "3"  # The threshold to trigger scaling based on HTTP requests
+      # Optional: Add timeWindow if needed, but not natively supported in HTTP trigger
+
+[cloudshell-user@ip-10-130-18-135 ~]$ cat scaledobject.yaml
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: interceptor-scaledobject
+  namespace: keda
+spec:
+  scaleTargetRef:
+    name: interceptor  # The name of the deployment you want to scale
+  triggers:
+  - type: http
+    metadata:
+      url: "http://interceptor-service:8080"  # URL of your service
+      method: "GET"  # You may want to use "GET" or another method, depending on your setup
+      threshold: "3"
