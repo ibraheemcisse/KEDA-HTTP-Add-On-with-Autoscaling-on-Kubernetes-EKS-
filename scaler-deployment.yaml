@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scaler
+  namespace: keda
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: scaler
+  template:
+    metadata:
+      labels:
+        app: scaler
+    spec:
+      containers:
+      - name: scaler
+        image: ghcr.io/ibraheemcisse/http-add-on-scaler:v1.0.0
+        imagePullPolicy: Always
+      imagePullSecrets:
+      - name: ghcr-secret
