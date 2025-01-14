@@ -8,7 +8,7 @@ def get_computer_choice():
 
 @app.route("/")
 def play_game():
-    # Get user choice from query parameter (default to 'rock' if not provided)
+    # Get user choice from query parameter (default  'rock' if not provided)
     user_choice = request.args.get("user_choice", "rock")
     if user_choice not in ["rock", "paper", "scissors"]:
         return jsonify({"error": "Invalid choice. Please choose 'rock', 'paper', or 'scissors'."}), 400
